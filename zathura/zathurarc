@@ -1,0 +1,4 @@
+set highlight-transparency 0.2
+set smooth-scroll true
+set guioptions 's'
+set selection-clipboard clipboard
