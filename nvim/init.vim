@@ -30,6 +30,7 @@ let mapleader = "\<Space>"		"Space is leader button
 let maplocalleader = "\<Space>"		"Space is also local leader button
 nnoremap j gj				"Enable moving down within a line
 nnoremap k gk				"Enable moving up within a line
+cmap w!! w !sudo tee > /dev/null %	"w!! to save as sudo
 
 nnoremap <C-J> <C-W><C-J>		"Easier navigation between window spilts
 nnoremap <C-K> <C-W><C-K>
