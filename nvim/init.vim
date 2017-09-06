@@ -34,7 +34,6 @@ set autoread
 set wildignore=*/node_modules/*,*/build/*
 set splitright
 set splitbelow
-set clipboard+=unnamedplus
 set cpoptions=aABceFsI
 let g:python3_host_prog="/usr/bin/python3.6"
 
