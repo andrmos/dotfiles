@@ -5,7 +5,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'sirver/ultisnips'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux'
-Plug 'kien/ctrlp.vim'
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'raimondi/delimitmate'
@@ -16,6 +15,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'mhartington/oceanic-next'
 Plug 'dkprice/vim-easygrep'
 Plug 'mattn/emmet-vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 syntax on
@@ -39,6 +40,7 @@ set cpoptions=aABceFsI
 let g:python3_host_prog="/usr/bin/python3.6"
 set scrolloff=5
 set noswapfile
+set grepprg=rg\ --vimgrep
 
 "Mappings
 inoremap jk <ESC>
@@ -85,11 +87,29 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 let g:user_emmet_leader_key='<C-e>'
 
-"CtrlP
-" let g:ctrlp_mruf_relative = 1
-" let g:ctrlp_cmd = "CtrlPMRU"
-let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-let g:ctrlp_use_caching = 0
+"FZF
+nnoremap <C-p> :Files<CR>
+let g:fzf_action = {
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+"Find everything using fzf
+"https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+let g:fzf_layout = { 'down': '~25%' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 "React
 let g:jsx_ext_required = 0
