@@ -17,6 +17,7 @@ Plug 'dkprice/vim-easygrep'
 Plug 'mattn/emmet-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'lorienhu/fzf-filemru'
 call plug#end()
 
 syntax on
@@ -88,7 +89,7 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 let g:user_emmet_leader_key='<C-e>'
 
 "FZF
-nnoremap <C-p> :Files<CR>
+nnoremap <c-p> :FilesMru --tiebreak=end<cr>
 let g:fzf_action = {
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
