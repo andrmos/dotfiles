@@ -48,7 +48,6 @@ inoremap jk <ESC>
 let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
 
-
 "Move by 'display lines' rather than 'logical lines.
 "When a v:count is provided, move by logical lines.
 nnoremap <expr> j v:count > 0 ? 'j' : 'gj'
@@ -74,6 +73,10 @@ nnoremap <Leader>y "+y
 vmap <Leader>y "+y
 nnoremap <Leader>r :so ~/.config/nvim/init.vim<CR>
 nnoremap Y y$
+
+"Indent multple times without losing visual selection
+xnoremap > >gv
+xnoremap < <gv
 
 "Appearance
 if (has("termguicolors"))
