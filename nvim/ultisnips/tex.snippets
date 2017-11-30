@@ -45,6 +45,23 @@ snippet root "tex root" b
 % !TEX root = main.tex
 endsnippet
 
-snippet todo "todo"
+snippet todo "Todo"
 \todo{$1}
+endsnippet
+
+snippet lab "Label"
+\label{$1}
+endsnippet
+
+# ~ is non breaking space
+snippet sref "Section Reference"
+Section~\ref{sec:$1}
+endsnippet
+
+snippet fref "Figure Reference"
+Figure~\ref{fig:$1}
+endsnippet
+
+snippet tref "Table Reference"
+Figure~\ref{tab:$1}
 endsnippet
