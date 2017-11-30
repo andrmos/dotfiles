@@ -1,5 +1,4 @@
 call plug#begin()
-Plug 'altercation/vim-colors-solarized'
 Plug 'lervag/vimtex'
 Plug 'scrooloose/nerdtree'
 Plug 'sirver/ultisnips'
@@ -18,6 +17,7 @@ Plug 'mattn/emmet-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'lorienhu/fzf-filemru'
+Plug 'junegunn/goyo.vim'
 call plug#end()
 
 syntax on
@@ -32,7 +32,7 @@ set expandtab
 set smartindent
 set ignorecase
 set smartcase
-set complete=.,w,b,u,t,i,kspell
+set complete=.,w,b,u,t,i,k
 set autoread
 set wildignore=*/node_modules/*,*/build/*
 set splitright
@@ -60,10 +60,11 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-tnoremap <C-h> <C-\><C-n><C-w>h
-tnoremap <C-j> <C-\><C-n><C-w>j
-tnoremap <C-k> <C-\><C-n><C-w>k
-tnoremap <C-l> <C-\><C-n><C-w>l
+" Conflicts with fzf
+" tnoremap <C-h> <C-\><C-n><C-w>h
+" tnoremap <C-j> <C-\><C-n><C-w>j
+" tnoremap <C-k> <C-\><C-n><C-w>k
+" tnoremap <C-l> <C-\><C-n><C-w>l
 set mouse=a
 
 nnoremap <Leader>v :vs<CR>
@@ -85,6 +86,7 @@ endif
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext
+hi NonText guifg=bg
 
 "Close method preview when leaving insert mode
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -121,6 +123,16 @@ let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js'
 autocmd FileType javascript set softtabstop=2
 autocmd FileType javascript set shiftwidth=2
 
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=161 ctermbg=251
+  highlight fzf2 ctermfg=23 ctermbg=251
+  highlight fzf3 ctermfg=237 ctermbg=251
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
+
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
 "Deoplete
 "Enable deoplete when InsertEnter.
 let g:deoplete#enable_at_startup = 0
@@ -133,6 +145,9 @@ let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 "Nerdtree
 nmap <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 20
+let NERDTreeMinimalUI = 1
+let NERDTreeShowLineNumbers = 0
+
 
 "NerdCommenter
 let g:NERDSpaceDelims = 1
@@ -143,11 +158,14 @@ let g:ale_sign_warning = '•'
 let g:ale_fixers = {
   \ 'javascript': ['eslint']
   \ }
-nmap <Leader>f <Plug>(ale_fix)
+nmap <silent> <Leader>af <Plug>(ale_fix)
+nmap <silent> <Leader>an <Plug>(ale_next)
+nmap <silent> <Leader>ap <Plug>(ale_previous)
 
 "Latex
 autocmd FileType tex set spell
 autocmd FileType tex set linebreak
+autocmd FileType tex Goyo 90
 
 let g:tex_flavor = 'latex'
 let g:vimtex_view_method = 'zathura'
