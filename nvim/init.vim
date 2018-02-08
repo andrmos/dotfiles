@@ -1,6 +1,6 @@
 call plug#begin()
 Plug 'lervag/vimtex'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'sirver/ultisnips'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux'
@@ -12,12 +12,12 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'w0rp/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'mhartington/oceanic-next'
-Plug 'dkprice/vim-easygrep'
-Plug 'mattn/emmet-vim'
+"Enabled for javascript and jsx
+Plug 'mattn/emmet-vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'lorienhu/fzf-filemru'
-Plug 'junegunn/goyo.vim'
+Plug 'lorienhu/fzf-filemru', { 'on': 'FilesMru' }
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo'}
 call plug#end()
 
 syntax on
