@@ -69,7 +69,6 @@ set mouse=a
 
 nnoremap <Leader>v :vs<CR>
 nnoremap <Leader>h :sp<CR>
-nnoremap <Leader>c :q<CR>
 nnoremap <Leader>y "+y
 vmap <Leader>y "+y
 nnoremap <Leader>r :so ~/.config/nvim/init.vim<CR>
@@ -86,7 +85,6 @@ endif
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext
-hi NonText guifg=bg
 
 "Close method preview when leaving insert mode
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -94,7 +92,7 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 let g:user_emmet_leader_key='<C-e>'
 
 "FZF
-nnoremap <c-p> :FilesMru --tiebreak=end<cr>
+nnoremap <silent> <c-p> :FilesMru --tiebreak=end<cr>
 let g:fzf_action = {
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
@@ -116,6 +114,11 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+"Dont show buffer in fzf
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 "React
 let g:jsx_ext_required = 0
@@ -140,10 +143,11 @@ autocmd InsertEnter * call deoplete#enable()
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
 endif
-let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+
+autocmd FileType tex let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 
 "Nerdtree
-nmap <C-n> :NERDTreeToggle<CR>
+nmap <silent> <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 20
 let NERDTreeMinimalUI = 1
 let NERDTreeShowLineNumbers = 0
@@ -165,6 +169,9 @@ nmap <silent> <Leader>ap <Plug>(ale_previous)
 "Latex
 autocmd FileType tex set spell
 autocmd FileType tex set linebreak
+"Create line line starting with \item
+autocmd FileType tex nnoremap <Leader>i o<BS>\item 
+autocmd FileType tex nnoremap <Leader>d o<BS>\item[] <ESC>hi
 autocmd FileType tex Goyo 90
 
 let g:tex_flavor = 'latex'
