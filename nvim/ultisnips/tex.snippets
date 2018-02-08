@@ -10,6 +10,10 @@ snippet gls "\gls{}"
 \gls{$1}
 endsnippet
 
+snippet glsf "\glsentryfull{}"
+\glsentryfull{$1}
+endsnippet
+
 snippet cite "Cite"
 \\cite{$1}
 endsnippet
@@ -33,6 +37,18 @@ snippet item "Itemize" b
 \\begin{itemize}
     \\item $0
 \\end{itemize}
+endsnippet
+
+snippet desc "Description" b
+\\begin{description}
+    \\item[$0]
+\\end{description}
+endsnippet
+
+snippet enum "Enumerate" b
+\\begin{enumerate}
+    \\item $0
+\\end{enumerate}
 endsnippet
 
 snippet begin "begin{...}" b
