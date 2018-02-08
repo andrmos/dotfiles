@@ -1,0 +1,44 @@
+snippet log "console.log()"
+console.log($1);
+endsnippet
+
+snippet cnstr "constructor"
+constructor(props) {
+  super(props);
+  $1
+}
+endsnippet
+
+snippet pcomp "Presentational component"
+import React from 'react';
+
+export default function $1(props) {
+  return (
+    $2
+  );
+}
+endsnippet
+
+snippet cls "React class"
+import React, { Component } from 'react';
+
+export default class $1 extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return (
+    );
+  }
+}
+endsnippet
+
+snippet imp "Import"
+import $1 from '$2';
+endsnippet
+
+snippet bind "Bind function"
+this.$1 = this.$1.bind(this);
+endsnippet
