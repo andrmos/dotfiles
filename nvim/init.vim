@@ -11,6 +11,7 @@ Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'w0rp/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
 Plug 'mhartington/oceanic-next'
 "Enabled for javascript and jsx
 Plug 'mattn/emmet-vim', { 'for': ['javascript', 'javascript.jsx'] }
