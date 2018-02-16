@@ -30,7 +30,6 @@ set encoding=utf-8
 set softtabstop=4
 set shiftwidth=4
 set expandtab
-set smartindent
 set ignorecase
 set smartcase
 set complete=.,w,b,u,t,i,k
