@@ -78,6 +78,8 @@ nnoremap Y y$
 xnoremap > >gv
 xnoremap < <gv
 
+nnoremap <silent> <Leader>n :noh<CR>
+
 "Appearance
 if (has("termguicolors"))
  set termguicolors
