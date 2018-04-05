@@ -180,6 +180,10 @@ autocmd FileType tex nnoremap <Leader>i o<BS>\item
 autocmd FileType tex nnoremap <Leader>d o<BS>\item[] <ESC>hi
 autocmd FileType tex Goyo 90
 
+vmap <Leader>s <Plug>(vimtex-cmd-create)
+vmap <Leader>it <Plug>(vimtex-cmd-create)textit<CR>
+vmap <Leader>bf <Plug>(vimtex-cmd-create)textbf<CR>
+
 let g:tex_flavor = 'latex'
 let g:vimtex_view_method = 'zathura'
 
@@ -192,7 +196,6 @@ let g:vimtex_quickfix_latexlog = {'fix_paths' : 0}
 
 "Move to {} and change inside the brackets
 nnoremap c{ f{ci{
-
 
 "UltiSnips
 let g:UltiSnipsExpandTrigger = "<tab>"
