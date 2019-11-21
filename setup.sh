@@ -1,15 +1,10 @@
-# brew install ...
-brew install git neovim fzf tmux htop fish kubectl maven
+brew install git neovim fzf tmux htop fish kubectl maven node yarn
 
-# brew cask install ...
-brew cask install iterm2 google-chrome slack notion spotify intellij-idea docker sensiblesidebuttons rectangle lastpass firefox karabiner-elements
-
-# node java keyboard language
+brew cask install firefox iterm2 slack spotify intellij-idea lastpass notion sensiblesidebuttons rectangle karabiner-elements google-chrome docker
 
 # dotfiles: vim, ideavimrc, tmuxconf, intellij file watchers, fish history, input mono font
+# keyboard shortcuts bytte vindu
 
-# keyboard speed:
-# defaults write -g InitialKeyRepeat -int 15
-# defaults write -g KeyRepeat -int 2
-
-# intellij config
+# Increase keyboard repeat speed
+defaults write -g InitialKeyRepeat -int 15
+defaults write -g KeyRepeat -int 2
