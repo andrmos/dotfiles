@@ -1,0 +1,18 @@
+source ~/.config/nvim/init.vim
+set surround
+set incsearch
+set hlsearch
+
+nnoremap > >>
+nnoremap < <<
+xnoremap > >gv
+xnoremap < <gv
+
+nnoremap <space>n :noh<cr>
+nnoremap <space>dd :action Debug<cr>
+nnoremap <space>dc :action ChooseDebugConfiguration<cr>
+nnoremap <space>rr :action Run<cr>
+nnoremap <space>rc :action ChooseRunConfiguration<cr>
+nnoremap <space>b :action Git.Branches<cr>
+nnoremap <space>mc :action Git.ResolveConflicts<cr>
+nnoremap <C-p> :action GotoFile<cr>
