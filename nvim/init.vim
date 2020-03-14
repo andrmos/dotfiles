@@ -18,7 +18,7 @@ Plug 'lorienhu/fzf-filemru', { 'on': 'FilesMru' }
 Plug 'leafgarland/typescript-vim'
 call plug#end()
 
-set omnifunc=syntaxcomplete#Complete
+" set omnifunc=syntaxcomplete#Complete
 
 syntax on
 filetype plugin indent on
@@ -84,7 +84,7 @@ let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext
 
 "Close method preview when leaving insert mode
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 let g:user_emmet_leader_key='<C-e>'
 
@@ -133,16 +133,9 @@ endfunction
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
-"Deoplete
-"Enable deoplete when InsertEnter.
-let g:deoplete#enable_at_startup = 1
-" let g:deoplete#enable_at_startup = 0
+"Lazy load deoplete
+let g:deoplete#enable_at_startup = 0
 autocmd InsertEnter * call deoplete#enable()
-" if !exists('g:deoplete#omni#input_patterns')
-" endif
-
-let g:deoplete#omni#input_patterns = {}
-let g:deoplete#max_list = 10
 
 "Nerdtree
 nmap <silent> <C-n> :NERDTreeToggle<CR>
@@ -160,6 +153,3 @@ let g:ale_fixers = {
   \ 'javascript': ['eslint'],
   \ 'python': ['autopep8']
   \ }
-nmap <silent> <Leader>af <Plug>(ale_fix)
-nmap <silent> <Leader>an <Plug>(ale_next)
-nmap <silent> <Leader>ap <Plug>(ale_previous)
