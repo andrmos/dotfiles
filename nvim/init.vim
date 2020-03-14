@@ -1,7 +1,6 @@
 call plug#begin()
 Plug 'lervag/vimtex'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'sirver/ultisnips'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
@@ -193,20 +192,3 @@ let g:vimtex_compiler_latexmk = {
 
 let g:vimtex_latexmk_progname = '/home/andre/.local/bin/nvr'
 let g:vimtex_quickfix_latexlog = {'fix_paths' : 0}
-
-"Move to {} and change inside the brackets
-nnoremap c{ f{ci{
-
-"UltiSnips
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<C-b>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-z>"
-let g:UltiSnipsSnippetsDir = '~/.config/nvim/ultisnips'
-let g:UltiSnipsSnippetDirectories = ["ultisnips"]
-let g:UltiSnipsEditSplit = 'horizontal'
-
-"Abbreviations
-ab exmaple example
-ab techonology technology
-ab techonoloy technology
-ab techonolgy technology
