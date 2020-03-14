@@ -37,7 +37,6 @@ set wildignore=*/node_modules/*,*/build/*
 set splitright
 set splitbelow
 set cpoptions=aABceFsI
-let g:python3_host_prog="/usr/bin/python3.6"
 set scrolloff=5
 set noswapfile
 set grepprg=rg\ --vimgrep
