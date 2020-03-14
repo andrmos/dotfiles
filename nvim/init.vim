@@ -1,5 +1,4 @@
 call plug#begin()
-Plug 'lervag/vimtex'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux'
@@ -12,12 +11,10 @@ Plug 'w0rp/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'mhartington/oceanic-next'
-"Enabled for javascript and jsx
 Plug 'mattn/emmet-vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'lorienhu/fzf-filemru', { 'on': 'FilesMru' }
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo'}
 Plug 'leafgarland/typescript-vim'
 call plug#end()
 
@@ -43,14 +40,12 @@ set cpoptions=aABceFsI
 set scrolloff=5
 set noswapfile
 set grepprg=rg\ --vimgrep
+set mouse=a
 
 "Mappings
 inoremap jk <ESC>
 let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
-
-nnoremap > >>
-nnoremap < <<
 
 "Move by 'display lines' rather than 'logical lines.
 "When a v:count is provided, move by logical lines.
@@ -64,12 +59,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-" Conflicts with fzf
-" tnoremap <C-h> <C-\><C-n><C-w>h
-" tnoremap <C-j> <C-\><C-n><C-w>j
-" tnoremap <C-k> <C-\><C-n><C-w>k
-" tnoremap <C-l> <C-\><C-n><C-w>l
-set mouse=a
 
 nnoremap <Leader>v :vs<CR>
 nnoremap <Leader>h :sp<CR>
@@ -78,9 +67,11 @@ vmap <Leader>y "+y
 nnoremap <Leader>r :so ~/.config/nvim/init.vim<CR>
 nnoremap Y y$
 
-"Indent multple times without losing visual selection
+"Indents
 xnoremap > >gv
 xnoremap < <gv
+nnoremap > >>
+nnoremap < <<
 
 nnoremap <silent> <Leader>n :noh<CR>
 
@@ -153,8 +144,6 @@ autocmd InsertEnter * call deoplete#enable()
 let g:deoplete#omni#input_patterns = {}
 let g:deoplete#max_list = 10
 
-" autocmd FileType tex let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
-
 "Nerdtree
 nmap <silent> <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 20
@@ -174,25 +163,3 @@ let g:ale_fixers = {
 nmap <silent> <Leader>af <Plug>(ale_fix)
 nmap <silent> <Leader>an <Plug>(ale_next)
 nmap <silent> <Leader>ap <Plug>(ale_previous)
-
-"Latex
-autocmd FileType tex set spell
-autocmd FileType tex set linebreak
-"Create line line starting with \item
-autocmd FileType tex nnoremap <Leader>i o<BS>\item 
-autocmd FileType tex nnoremap <Leader>d o<BS>\item[] <ESC>hi
-autocmd FileType tex Goyo 90
-
-vmap <Leader>s <Plug>(vimtex-cmd-create)
-vmap <Leader>it <Plug>(vimtex-cmd-create)textit<CR>
-vmap <Leader>bf <Plug>(vimtex-cmd-create)textbf<CR>
-
-let g:tex_flavor = 'latex'
-let g:vimtex_view_method = 'zathura'
-
-let g:vimtex_compiler_latexmk = {
-\   'build_dir' : '../build',	
-\}
-
-let g:vimtex_latexmk_progname = '/home/andre/.local/bin/nvr'
-let g:vimtex_quickfix_latexlog = {'fix_paths' : 0}
