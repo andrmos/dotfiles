@@ -18,7 +18,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'lorienhu/fzf-filemru', { 'on': 'FilesMru' }
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo'}
+Plug 'leafgarland/typescript-vim'
 call plug#end()
+
+set omnifunc=syntaxcomplete#Complete
 
 syntax on
 filetype plugin indent on
@@ -45,6 +48,9 @@ set grepprg=rg\ --vimgrep
 inoremap jk <ESC>
 let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
+
+nnoremap > >>
+nnoremap < <<
 
 "Move by 'display lines' rather than 'logical lines.
 "When a v:count is provided, move by logical lines.
@@ -138,23 +144,22 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 "Deoplete
 "Enable deoplete when InsertEnter.
-let g:deoplete#enable_at_startup = 0
+let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 0
 autocmd InsertEnter * call deoplete#enable()
-if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-endif
-if exists('g:deoplete#max_list')
-    g:deoplete#max_list = 10
-endif
+" if !exists('g:deoplete#omni#input_patterns')
+" endif
 
-autocmd FileType tex let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+let g:deoplete#omni#input_patterns = {}
+let g:deoplete#max_list = 10
+
+" autocmd FileType tex let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 
 "Nerdtree
 nmap <silent> <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 20
 let NERDTreeMinimalUI = 1
 let NERDTreeShowLineNumbers = 0
-
 
 "NerdCommenter
 let g:NERDSpaceDelims = 1
