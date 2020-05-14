@@ -19,6 +19,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'lorienhu/fzf-filemru', { 'on': 'FilesMru' }
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo'}
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 syntax on

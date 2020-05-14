@@ -1,6 +1,6 @@
-brew install git neovim fzf tmux htop fish kubectl maven node yarn diff-so-fancy hub
+brew install git neovim fzf tmux htop fish kubectl maven node yarn diff-so-fancy ripgrep github/gh/gh httpie
 
-brew cask install firefox iterm2 slack spotify intellij-idea lastpass notion sensiblesidebuttons rectangle karabiner-elements google-chrome docker java abstract
+brew cask install firefox iterm2 slack spotify intellij-idea lastpass sensiblesidebuttons rectangle karabiner-elements google-chrome docker java figma jetbrains-toolbox postman
 
 # dotfiles: vim, ideavimrc, tmuxconf, intellij file watchers, fish history, input mono font
 # keyboard shortcuts bytte vindu
