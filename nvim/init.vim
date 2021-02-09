@@ -2,26 +2,25 @@ call plug#begin()
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux'
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+
+Plug 'yuezk/vim-js'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'udalov/kotlin-vim'
+
 Plug 'raimondi/delimitmate'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
-Plug 'w0rp/ale'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
+
 Plug 'mhartington/oceanic-next'
 Plug 'mattn/emmet-vim', { 'for': ['javascript', 'javascript.jsx'] }
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'lorienhu/fzf-filemru', { 'on': 'FilesMru' }
 Plug 'vimwiki/vimwiki'
-Plug 'leafgarland/typescript-vim'
 call plug#end()
 
-" set omnifunc=syntaxcomplete#Complete
-
-syntax on
+syntax enable
 filetype plugin indent on
 set number
 set relativenumber
@@ -38,6 +37,7 @@ set wildignore=*/node_modules/*,*/build/*
 set splitright
 set splitbelow
 set cpoptions=aABceFsI
+let g:python3_host_prog="/usr/bin/python3.6"
 set scrolloff=5
 set noswapfile
 set grepprg=rg\ --vimgrep
@@ -68,11 +68,9 @@ vmap <Leader>y "+y
 nnoremap <Leader>r :so ~/.config/nvim/init.vim<CR>
 nnoremap Y y$
 
-"Indents
+"Indent multple times without losing visual selection
 xnoremap > >gv
 xnoremap < <gv
-nnoremap > >>
-nnoremap < <<
 
 nnoremap <silent> <Leader>n :noh<CR>
 
@@ -85,18 +83,23 @@ let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext
 
 "Close method preview when leaving insert mode
-" autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
-let g:user_emmet_leader_key='<C-e>'
+"VimWiki
+:map <Leader>m <Plug>VimwikiToggleListItem
 
 "FZF
-nnoremap <silent> <c-p> :FilesMru --tiebreak=end<cr>
+" Slå av preview vindu for FZF
+let g:fzf_preview_window = []
+
+nnoremap <silent> <C-p> :Files<cr>
+nnoremap <Leader>f :Find<CR>
 let g:fzf_action = {
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
 "Find everything using fzf
 "https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 let g:fzf_layout = { 'down': '~25%' }
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -118,12 +121,6 @@ autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-"React
-let g:jsx_ext_required = 0
-let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js'
-autocmd FileType javascript set softtabstop=2
-autocmd FileType javascript set shiftwidth=2
-
 function! s:fzf_statusline()
   " Override statusline as you like
   highlight fzf1 ctermfg=161 ctermbg=251
@@ -134,10 +131,6 @@ endfunction
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
-"Lazy load deoplete
-let g:deoplete#enable_at_startup = 0
-autocmd InsertEnter * call deoplete#enable()
-
 "Nerdtree
 nmap <silent> <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 20
@@ -146,11 +139,3 @@ let NERDTreeShowLineNumbers = 0
 
 "NerdCommenter
 let g:NERDSpaceDelims = 1
-
-"ALE lint
-let g:ale_sign_error = '•'
-let g:ale_sign_warning = '•'
-let g:ale_fixers = {
-  \ 'javascript': ['eslint'],
-  \ 'python': ['autopep8']
-  \ }
