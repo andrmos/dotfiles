@@ -23,7 +23,6 @@ call plug#end()
 syntax enable
 filetype plugin indent on
 set number
-set relativenumber
 set ruler
 set encoding=utf-8
 set softtabstop=4
@@ -73,6 +72,9 @@ xnoremap > >gv
 xnoremap < <gv
 
 nnoremap <silent> <Leader>n :noh<CR>
+
+" Format JSON
+nnoremap <Leader>j :%!python -m json.tool<CR>
 
 "Appearance
 if (has("termguicolors"))
