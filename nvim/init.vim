@@ -3,21 +3,23 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux'
 
-Plug 'yuezk/vim-js'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'udalov/kotlin-vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'vimwiki/vimwiki'
+
+Plug 'mhartington/oceanic-next'
+Plug 'mattn/emmet-vim', { 'for': ['javascript', 'javascript.jsx'] }
 
 Plug 'raimondi/delimitmate'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 
-Plug 'mhartington/oceanic-next'
-Plug 'mattn/emmet-vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'neovim/nvim-lspconfig'
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'vimwiki/vimwiki'
+Plug 'yuezk/vim-js'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'udalov/kotlin-vim'
 call plug#end()
 
 syntax enable
@@ -101,7 +103,7 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 "Find everything using fzf
 "https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --no-column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 let g:fzf_layout = { 'down': '~25%' }
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -141,3 +143,29 @@ let NERDTreeShowLineNumbers = 0
 
 "NerdCommenter
 let g:NERDSpaceDelims = 1
+
+"LSP
+lua << EOF
+local nvim_lsp = require('lspconfig')
+
+local on_attach = function(client, bufnr)
+
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    local opts = { noremap=true, silent=true }
+
+    buf_set_keymap('n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+end
+
+-- ts/js: https://github.com/neovim/nvim-lspconfig. Installer med npm
+-- kotlin: https://github.com/fwcd/kotlin-language-server. Bygg og legg i PATH 
+local servers = { 'tsserver', 'kotlin_language_server' }
+
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
+EOF
